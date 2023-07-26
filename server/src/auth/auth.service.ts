@@ -3,17 +3,20 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
+import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import { RegisterUserDto } from './dto/register-user.dto';
-import { User } from './types/user.type';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginUserDto } from './dto/login-user.dto';
+import { RegisterUserDto } from './dto/register-user.dto';
 
 @Injectable()
 export class AuthService {
-  private users: User[] = [];
+  constructor(private prisma: PrismaService) {}
 
   async validateUser(user: LoginUserDto): Promise<Omit<User, 'password'>> {
-    const foundUser = this.users.find((u) => u.email === user.email);
+    const foundUser = await this.prisma.user.findUnique({
+      where: { email: user.email },
+    });
     const isPasswordMatch = await bcrypt.compare(
       user.password,
       foundUser.password,
@@ -24,17 +27,22 @@ export class AuthService {
   }
 
   async registerUser(user: RegisterUserDto): Promise<Omit<User, 'password'>> {
-    const existingUser = this.users.find((u) => u.email === user.email);
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email: user.email },
+    });
     if (existingUser) throw new BadRequestException();
     user.password = await bcrypt.hash(user.password, 8);
-    const newUser = { ...user, id: Date.now().toString() };
-    this.users.push(newUser);
+    const newUser = await this.prisma.user.create({
+      data: user,
+    });
     Reflect.deleteProperty(user, 'password');
     return newUser;
   }
 
   async findById(id: string): Promise<Omit<User, 'password'>> {
-    const user = this.users.find((u) => u.id === id);
+    const user = await this.prisma.user.findUnique({
+      where: { id: id },
+    });
     if (!user) throw new BadRequestException();
     Reflect.deleteProperty(user, 'password');
     return user;
