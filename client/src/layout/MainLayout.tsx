@@ -8,6 +8,7 @@ import {
   Text,
 } from "@mantine/core";
 import { ReactNode, useState } from "react";
+import AuthButtons from "./AuthButtons";
 
 type Props = {
   children: ReactNode;
@@ -32,7 +33,7 @@ function MainLayout(props: Props) {
       }
       header={
         <Header height={50}>
-          <Flex align="center" h="100%">
+          <Flex align="center" h="100%" px="1rem">
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
               <Burger
                 size="sm"
@@ -40,7 +41,8 @@ function MainLayout(props: Props) {
                 onClick={() => setIsNavbarOpened(!isNavbarOpened)}
               />
             </MediaQuery>
-            <Text>Header</Text>
+            {/* TODO: make header elements responsive */}
+            <AuthButtons />
           </Flex>
         </Header>
       }
