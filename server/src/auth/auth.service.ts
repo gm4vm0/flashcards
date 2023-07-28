@@ -8,6 +8,7 @@ import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginUserDto } from './dto/login-user.dto';
 import { RegisterUserDto } from './dto/register-user.dto';
+import { Session } from 'express-session';
 
 @Injectable()
 export class AuthService {
@@ -37,6 +38,13 @@ export class AuthService {
     });
     Reflect.deleteProperty(user, 'password');
     return newUser;
+  }
+
+  async logout(session: Session) {
+    if (!session) throw new BadRequestException();
+    session.destroy((err) => {
+      if (err) throw new BadRequestException();
+    });
   }
 
   async findById(id: string): Promise<Omit<User, 'password'>> {

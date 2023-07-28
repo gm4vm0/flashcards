@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { Request } from 'express';
 import { Session } from 'express-session';
 import { AuthService } from './auth.service';
@@ -22,6 +30,16 @@ export class AuthController {
   @Post('login')
   async login(@Req() req: Request & { session: Session }): Promise<Session> {
     return req.session;
+  }
+
+  @Get('logged-in')
+  async isLoggedIn(@Req() req: Request): Promise<boolean> {
+    return req.isAuthenticated();
+  }
+
+  @Delete('logout')
+  async logout(@Req() req: Request & { session: Session }) {
+    return await this.authService.logout(req.session);
   }
 
   @UseGuards(LoggedInGuard)
