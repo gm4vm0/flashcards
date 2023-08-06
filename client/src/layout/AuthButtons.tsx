@@ -5,10 +5,7 @@ import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
 
 function AuthButtons() {
-  const [isLoggedIn, setIsLoggedIn] = useAuthStore((state) => [
-    state.isLoggedIn,
-    state.setIsLoggedIn,
-  ]);
+  const [user, setUser] = useAuthStore((state) => [state.user, state.setUser]);
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -20,12 +17,12 @@ function AuthButtons() {
 
   const onLogout = () => {
     mutation.mutate();
-    setIsLoggedIn(false);
+    setUser(null);
   };
 
   return (
     <Flex ml="auto">
-      {isLoggedIn ? (
+      {user ? (
         <Button
           variant="subtle"
           styles={{

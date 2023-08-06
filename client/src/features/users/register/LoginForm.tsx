@@ -14,7 +14,7 @@ const inputsSchema = z.object({
 type Inputs = z.infer<typeof inputsSchema>;
 
 function LoginForm() {
-  const setIsLoggedIn = useAuthStore((state) => state.setIsLoggedIn);
+  const setUser = useAuthStore((state) => state.setUser);
 
   const {
     register,
@@ -36,8 +36,8 @@ function LoginForm() {
 
   const onSubmit = (data: Inputs) => {
     mutation.mutate(data, {
-      onSuccess: () => {
-        setIsLoggedIn(true);
+      onSuccess: (data) => {
+        setUser(data.data);
         navigate("/");
       },
     });

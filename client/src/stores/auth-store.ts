@@ -1,26 +1,24 @@
+import { User } from "@/types/user-type";
 import axios from "axios";
 import { create } from "zustand";
 
 type AuthState = {
-  isLoggedIn: boolean;
-  setIsLoggedIn: (isLoggedIn: boolean) => void;
+  user: User | null;
+  setUser: (user: User | null) => void;
 };
 
 const useAuthStore = create<AuthState>((set) => ({
-  isLoggedIn: false,
-  setIsLoggedIn: (isLoggedIn) => set({ isLoggedIn: isLoggedIn }),
+  user: null,
+  setUser: (user) => set({ user: user }),
 }));
 
-async function getLoggedInState() {
-  const response = await axios.get(
-    import.meta.env.VITE_API_URL + "auth/logged-in",
-    {
-      withCredentials: true,
-    }
-  );
+async function getUser() {
+  const response = await axios.get(import.meta.env.VITE_API_URL + "auth", {
+    withCredentials: true,
+  });
   return response.data;
 }
 
-getLoggedInState().then((isLoggedIn) => useAuthStore.setState({ isLoggedIn }));
+getUser().then((user) => useAuthStore.setState({ user }));
 
 export default useAuthStore;

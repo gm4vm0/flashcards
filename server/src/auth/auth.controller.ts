@@ -19,6 +19,15 @@ import { User } from '@prisma/client';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Get()
+  async getUser(
+    @Req() req: Request & { session: Session },
+  ): Promise<Omit<User, 'password'>> {
+    const user = req.user as User;
+    Reflect.deleteProperty(user, 'password');
+    return user;
+  }
+
   @Post('register')
   async registerUser(
     @Body() user: RegisterUserDto,

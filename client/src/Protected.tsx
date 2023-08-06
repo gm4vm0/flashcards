@@ -14,11 +14,11 @@ function Protected() {
     },
   });
 
-  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const user = useAuthStore((state) => state.user);
 
   return (
     <div>
-      <p>logged in state: {isLoggedIn ? "true" : "false"} </p>
+      <p>logged in state: {user ? "true" : "false"} </p>
       <p>{!isLoading && data}</p>
     </div>
   );
