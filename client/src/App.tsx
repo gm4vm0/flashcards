@@ -1,28 +1,39 @@
-import { Center, MantineProvider } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 import { QueryClient, QueryClientProvider } from "react-query";
-import FlashcardsCarousel from "@/features/flashcards/FlashcardsCarousel";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import Protected from "./Protected";
 import MainLayout from "./layout/MainLayout";
-import AddFlashcardModal from "@/features/flashcards/add-flashcard/AddFlashcardModal";
+import Index from "./routes/Index";
+import Login from "./routes/Login";
+import Register from "./routes/Register";
 
 const queryClient = new QueryClient();
 
+const router = createBrowserRouter([
+  {
+    element: (
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider withGlobalStyles withNormalizeCSS>
+          <MainLayout>
+            <Outlet />
+          </MainLayout>
+        </MantineProvider>
+      </QueryClientProvider>
+    ),
+    children: [
+      {
+        path: "/",
+        element: <Index />,
+      },
+      { path: "/register", element: <Register /> },
+      { path: "/login", element: <Login /> },
+      { path: "/protected", element: <Protected /> },
+    ],
+  },
+]);
+
 function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <MantineProvider withGlobalStyles withNormalizeCSS>
-        <MainLayout>
-          <Center
-            w="100%"
-            h="100%"
-            sx={{ flexDirection: "column", padding: 0 }}
-          >
-            <FlashcardsCarousel />
-            <AddFlashcardModal />
-          </Center>
-        </MainLayout>
-      </MantineProvider>
-    </QueryClientProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

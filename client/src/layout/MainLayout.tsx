@@ -1,6 +1,7 @@
 import {
   AppShell,
   Burger,
+  Divider,
   Flex,
   Header,
   MediaQuery,
@@ -8,6 +9,8 @@ import {
   Text,
 } from "@mantine/core";
 import { ReactNode, useState } from "react";
+import AuthButtons from "./AuthButtons";
+import useAuthStore from "@/stores/auth-store";
 
 type Props = {
   children: ReactNode;
@@ -15,6 +18,7 @@ type Props = {
 
 function MainLayout(props: Props) {
   const [isNavbarOpened, setIsNavbarOpened] = useState(false);
+  const user = useAuthStore((state) => state.user);
 
   return (
     <AppShell
@@ -27,12 +31,18 @@ function MainLayout(props: Props) {
           hidden={!isNavbarOpened}
           withBorder
         >
-          <Text>Navbar</Text>
+          <Navbar.Section grow>
+            <Text>Navbar</Text>
+          </Navbar.Section>
+          <Divider />
+          <Navbar.Section>
+            <Text>User: {user?.firstName}</Text>
+          </Navbar.Section>
         </Navbar>
       }
       header={
         <Header height={50}>
-          <Flex align="center" h="100%">
+          <Flex align="center" h="100%" px="1rem">
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
               <Burger
                 size="sm"
@@ -40,7 +50,8 @@ function MainLayout(props: Props) {
                 onClick={() => setIsNavbarOpened(!isNavbarOpened)}
               />
             </MediaQuery>
-            <Text>Header</Text>
+            {/* TODO: make header elements responsive */}
+            <AuthButtons />
           </Flex>
         </Header>
       }

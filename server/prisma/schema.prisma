@@ -12,3 +12,11 @@ model Card {
   front String
   back  String
 }
+
+model User {
+  id        String @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String @unique
+  password  String
+}
