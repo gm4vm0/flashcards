@@ -38,8 +38,12 @@ export class AuthController {
 
   @UseGuards(LocalGuard)
   @Post('login')
-  async login(@Req() req: Request & { session: Session }): Promise<Session> {
-    return req.session;
+  async login(
+    @Req() req: Request & { session: Session },
+  ): Promise<Omit<User, 'password'>> {
+    const user = req.user as User;
+    Reflect.deleteProperty(user, 'password');
+    return user;
   }
 
   @Get('logged-in')
