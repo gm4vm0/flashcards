@@ -44,8 +44,8 @@ function AuthButtons() {
               },
             }}
           >
-            <Text component={Link} to="/register">
-              Register
+            <Text component={Link} to="/login">
+              Login
             </Text>
           </Button>
           <Button
@@ -56,8 +56,8 @@ function AuthButtons() {
               },
             }}
           >
-            <Text component={Link} to="/login">
-              Login
+            <Text component={Link} to="/register">
+              Register
             </Text>
           </Button>
         </div>
