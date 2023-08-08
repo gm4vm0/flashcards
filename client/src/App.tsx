@@ -13,7 +13,30 @@ const router = createBrowserRouter([
   {
     element: (
       <QueryClientProvider client={queryClient}>
-        <MantineProvider withGlobalStyles withNormalizeCSS>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            white: "#f5f5f5",
+            black: "#111111",
+            colors: {
+              yellow: [
+                "#FFF7E3",
+                "#FFE08F",
+                "#FFCC4A",
+                "#FFBC11",
+                "#D79A00",
+                "#AA7A00",
+                "#866000",
+                "#6A4C00",
+                "#543C00",
+                "#423000",
+              ],
+            },
+            primaryColor: "yellow",
+            primaryShade: 4,
+          }}
+        >
           <MainLayout>
             <Outlet />
           </MainLayout>
