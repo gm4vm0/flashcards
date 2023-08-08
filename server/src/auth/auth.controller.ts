@@ -24,6 +24,7 @@ export class AuthController {
     @Req() req: Request & { session: Session },
   ): Promise<Omit<User, 'password'>> {
     const user = req.user as User;
+    if (!user) return null;
     Reflect.deleteProperty(user, 'password');
     return user;
   }
