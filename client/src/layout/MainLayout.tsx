@@ -35,7 +35,7 @@ function MainLayout(props: Props) {
           </Navbar.Section>
           <Divider />
           <Navbar.Section>
-            <Text>User: {user?.firstName}</Text>
+            {user && <Text>User: {user.firstName}</Text>}
           </Navbar.Section>
         </Navbar>
       }
