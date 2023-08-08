@@ -38,6 +38,7 @@ function AuthButtons() {
         <div>
           <Button
             variant="subtle"
+            color="primary"
             styles={{
               root: {
                 "&:hover": { background: "none" },
@@ -49,7 +50,7 @@ function AuthButtons() {
             </Text>
           </Button>
           <Button
-            variant="outline"
+            color="primary"
             styles={{
               root: {
                 borderRadius: "1rem",
