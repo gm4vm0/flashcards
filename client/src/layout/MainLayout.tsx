@@ -29,7 +29,6 @@ function MainLayout(props: Props) {
           width={{ sm: "12rem", lg: "16rem" }}
           hiddenBreakpoint="sm"
           hidden={!isNavbarOpened}
-          withBorder
         >
           <Navbar.Section grow>
             <Text>Navbar</Text>
@@ -50,7 +49,6 @@ function MainLayout(props: Props) {
                 onClick={() => setIsNavbarOpened(!isNavbarOpened)}
               />
             </MediaQuery>
-            {/* TODO: make header elements responsive */}
             <AuthButtons />
           </Flex>
         </Header>
