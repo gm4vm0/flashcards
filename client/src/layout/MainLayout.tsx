@@ -40,8 +40,8 @@ function MainLayout(props: Props) {
         </Navbar>
       }
       header={
-        <Header height={50}>
-          <Flex align="center" h="100%" px="1rem">
+        <Header height={60}>
+          <Flex align="center" h="100%" mx="5rem">
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
               <Burger
                 size="sm"
