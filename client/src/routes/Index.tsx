@@ -1,11 +1,13 @@
 import { Center } from "@mantine/core";
-import FlashcardsCarousel from "@/features/flashcards/FlashcardsCarousel";
 import AddFlashcardModal from "@/features/flashcards/add-flashcard/AddFlashcardModal";
+import Flashcards from "@/features/flashcards/Flashcards";
+import FlashcardControls from "@/features/flashcards/FlashcardControls";
 
 function Index() {
   return (
     <Center w="100%" h="100%" sx={{ flexDirection: "column", padding: 0 }}>
-      <FlashcardsCarousel />
+      <Flashcards />
+      <FlashcardControls />
       <AddFlashcardModal />
     </Center>
   );
