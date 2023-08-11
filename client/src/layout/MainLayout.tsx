@@ -41,16 +41,20 @@ function MainLayout(props: Props) {
       }
       header={
         <Header height={60}>
-          <Flex align="center" h="100%" mx="5rem">
-            <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-              <Burger
-                size="sm"
-                opened={isNavbarOpened}
-                onClick={() => setIsNavbarOpened(!isNavbarOpened)}
-              />
+          <MediaQuery largerThan="lg" styles={{ margin: "0 5rem" }}>
+            <MediaQuery largerThan="sm" styles={{ margin: "0 3rem" }}>
+              <Flex align="center" h="100%" mx="1rem">
+                <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+                  <Burger
+                    size="sm"
+                    opened={isNavbarOpened}
+                    onClick={() => setIsNavbarOpened(!isNavbarOpened)}
+                  />
+                </MediaQuery>
+                <AuthButtons />
+              </Flex>
             </MediaQuery>
-            <AuthButtons />
-          </Flex>
+          </MediaQuery>
         </Header>
       }
     >
