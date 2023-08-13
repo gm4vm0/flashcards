@@ -7,6 +7,7 @@ import Index from "./routes/Index";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
 import theme from "./theme";
+import ProtectedRoute from "./ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +29,14 @@ const browserRouter = createBrowserRouter([
       },
       { path: "/register", element: <Register /> },
       { path: "/login", element: <Login /> },
-      { path: "/protected", element: <Protected /> },
+      {
+        path: "/protected",
+        element: (
+          <ProtectedRoute>
+            <Protected />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);

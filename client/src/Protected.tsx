@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import useAuthStore from "./stores/auth-store";
 
 function Protected() {
   const { isLoading, data } = useQuery({
@@ -14,11 +13,8 @@ function Protected() {
     },
   });
 
-  const user = useAuthStore((state) => state.user);
-
   return (
     <div>
-      <p>logged in state: {user ? "true" : "false"} </p>
       <p>{!isLoading && data}</p>
     </div>
   );
