@@ -1,7 +1,7 @@
 import useCardsStore from "@/stores/cards-store";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Box, Center, Flex, Group, Paper, Text } from "@mantine/core";
+import { Center, Flex, Group, Paper, Text } from "@mantine/core";
 import EditFlashcardModal from "./edit-flashcard/EditFlashcardModal";
 import DeleteFlashcardButton from "./delete-flashcard/DeleteFlashcardButton";
 import { useEffect, useState } from "react";
@@ -58,7 +58,7 @@ function Flashcards() {
   }, []);
 
   return (
-    <Center w="100%" h="75%">
+    <Center w="100%" h="100%">
       {currentCard && (
         <Flex direction="column" w="100%" h="100%" align="center" rowGap="lg">
           <Paper
@@ -67,16 +67,16 @@ function Flashcards() {
             radius="lg"
             m="xl"
             p="xl"
-            w="75%"
+            w="100%"
             h="100%"
             withBorder
             sx={{ cursor: "pointer" }}
           >
             <Group>
-              <EditFlashcardModal card={currentCard} />
-              <Box sx={{ marginLeft: "auto" }}>
+              <Flex w="100%" justify="space-between">
+                <EditFlashcardModal card={currentCard} />
                 <DeleteFlashcardButton cardId={currentCard.id} />
-              </Box>
+              </Flex>
             </Group>
             <Center h="100%" p="sm">
               <Text fz="lg" sx={{ userSelect: "none" }}>
