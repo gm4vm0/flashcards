@@ -10,6 +10,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { REDIS } from './redis/redis.constants';
 import { RedisModule } from './redis/redis.module';
 import { AuthModule } from './auth/auth.module';
+import ms from 'ms';
 
 @Module({
   imports: [PrismaModule, CardsModule, RedisModule, AuthModule],
@@ -27,6 +28,9 @@ export class AppModule implements NestModule {
           resave: false,
           saveUninitialized: false,
           secret: process.env.JWT_SECRET,
+          cookie: {
+            maxAge: ms('0.5 Y'),
+          },
         }),
         passport.initialize(),
         passport.session(),
