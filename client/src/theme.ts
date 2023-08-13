@@ -1,7 +1,11 @@
 import { MantineThemeOverride } from "@mantine/core";
 
 const theme: MantineThemeOverride = {
-  white: "#f5f5f5",
+  focusRingStyles: {
+    resetStyles: () => ({ outline: "none" }),
+    styles: (theme) => ({ outline: `2px solid ${theme.colors.primary[2]}` }),
+  },
+  white: "#F5F5F5",
   black: "#111111",
   colors: {
     primary: [
@@ -28,6 +32,7 @@ const theme: MantineThemeOverride = {
       "#541400",
       "#431000",
     ],
+    neutral: ["#F5F5F5", "", "", "", "", "", "", "", "", "#111111"],
   },
   primaryShade: 4,
 };
