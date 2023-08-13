@@ -1,10 +1,11 @@
 import useCardsStore from "@/stores/cards-store";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Box, Center, Group, Paper, Text } from "@mantine/core";
+import { Box, Center, Flex, Group, Paper, Text } from "@mantine/core";
 import EditFlashcardModal from "./edit-flashcard/EditFlashcardModal";
 import DeleteFlashcardButton from "./delete-flashcard/DeleteFlashcardButton";
 import { useEffect, useState } from "react";
+import FlashcardControls from "./FlashcardControls";
 
 function Flashcards() {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -31,29 +32,32 @@ function Flashcards() {
   return (
     <Center w="100%" h="75%">
       {currentCard && (
-        <Paper
-          onClick={() => setIsFlipped(!isFlipped)}
-          shadow="sm"
-          radius="lg"
-          m="xl"
-          p="xl"
-          w="75%"
-          h="100%"
-          withBorder
-          sx={{ cursor: "pointer" }}
-        >
-          <Group>
-            <EditFlashcardModal card={currentCard} />
-            <Box sx={{ marginLeft: "auto" }}>
-              <DeleteFlashcardButton cardId={currentCard.id} />
-            </Box>
-          </Group>
-          <Center h="100%" p="sm">
-            <Text fz="lg" sx={{ userSelect: "none" }}>
-              {isFlipped ? currentCard.back : currentCard.front}
-            </Text>
-          </Center>
-        </Paper>
+        <Flex direction="column" w="100%" h="100%" align="center" rowGap="lg">
+          <Paper
+            onClick={() => setIsFlipped(!isFlipped)}
+            shadow="sm"
+            radius="lg"
+            m="xl"
+            p="xl"
+            w="75%"
+            h="100%"
+            withBorder
+            sx={{ cursor: "pointer" }}
+          >
+            <Group>
+              <EditFlashcardModal card={currentCard} />
+              <Box sx={{ marginLeft: "auto" }}>
+                <DeleteFlashcardButton cardId={currentCard.id} />
+              </Box>
+            </Group>
+            <Center h="100%" p="sm">
+              <Text fz="lg" sx={{ userSelect: "none" }}>
+                {isFlipped ? currentCard.back : currentCard.front}
+              </Text>
+            </Center>
+          </Paper>
+          <FlashcardControls />
+        </Flex>
       )}
     </Center>
   );
