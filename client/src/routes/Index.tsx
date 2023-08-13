@@ -1,4 +1,4 @@
-import { Center, Flex } from "@mantine/core";
+import { Center, Flex, Text } from "@mantine/core";
 import AddFlashcardModal from "@/features/flashcards/add-flashcard/AddFlashcardModal";
 import Flashcards from "@/features/flashcards/Flashcards";
 import useAuthStore from "@/stores/auth-store";
@@ -16,7 +16,10 @@ function Index() {
       py="3rem"
       sx={{ flexDirection: "column" }}
     >
-      <Flex w="100%" justify="end">
+      <Flex w="100%" mb="lg" justify="space-between" align="center">
+        <Text fz="xl" fw="bold">
+          Welcome, {user.firstName}
+        </Text>
         <AddFlashcardModal />
       </Flex>
       <Flashcards />
