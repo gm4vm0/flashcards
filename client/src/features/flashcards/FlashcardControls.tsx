@@ -1,17 +1,21 @@
 import useCardsStore from "@/stores/cards-store";
-import { ActionIcon, Group, useMantineTheme } from "@mantine/core";
+import { ActionIcon, Group, Text, useMantineTheme } from "@mantine/core";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 
 function FlashcardControls() {
   const black = useMantineTheme().black;
 
-  const [setNextCard, setPrevCard] = useCardsStore((state) => [
-    state.setNextCard,
-    state.setPrevCard,
-  ]);
+  const [cards, currentCardIndex, setNextCard, setPrevCard] = useCardsStore(
+    (state) => [
+      state.cards,
+      state.currentCardIndex,
+      state.setNextCard,
+      state.setPrevCard,
+    ]
+  );
 
   return (
-    <Group spacing="8rem">
+    <Group>
       <ActionIcon
         component="button"
         size="xl"
@@ -21,6 +25,9 @@ function FlashcardControls() {
       >
         <IconArrowLeft color={black} stroke={1.5} />
       </ActionIcon>
+      <Text w="5rem" color="gray.6" ta="center">
+        {currentCardIndex + 1} / {cards.length}
+      </Text>
       <ActionIcon
         component="button"
         size="xl"
