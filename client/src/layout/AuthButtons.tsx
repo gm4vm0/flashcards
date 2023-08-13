@@ -25,6 +25,7 @@ function AuthButtons() {
       {user ? (
         <Button
           variant="subtle"
+          color="primary"
           styles={{
             root: {
               "&:hover": { background: "none" },
