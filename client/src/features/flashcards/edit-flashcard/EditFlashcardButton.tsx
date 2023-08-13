@@ -1,4 +1,4 @@
-import { UnstyledButton } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { IconPencil } from "@tabler/icons-react";
 
 type Props = {
@@ -7,9 +7,9 @@ type Props = {
 
 function EditFlashcardButton(props: Props) {
   return (
-    <UnstyledButton onClick={props.onClick}>
+    <ActionIcon onClick={props.onClick} color="neutral.9">
       <IconPencil strokeWidth={1.5} />
-    </UnstyledButton>
+    </ActionIcon>
   );
 }
 
