@@ -21,7 +21,9 @@ function Flashcards() {
   const currentCard = cards[currentCardIndex];
 
   // flip card to front when card changed
-  useEffect(() => setIsFlipped(false), [currentCardIndex]);
+  useEffect(() => {
+    setIsFlipped(false);
+  }, [currentCardIndex]);
 
   useQuery({
     queryKey: ["cards"],
@@ -55,14 +57,17 @@ function Flashcards() {
     return () => {
       document.removeEventListener("keydown", keydownListener);
     };
-  }, []);
+  }, [isFlipped]);
 
   return (
     <Center w="100%" h="100%">
       {currentCard && (
         <Flex direction="column" w="100%" h="100%" align="center" rowGap="lg">
           <Paper
-            onClick={() => setIsFlipped(!isFlipped)}
+            onClick={() => {
+              setIsFlipped(!isFlipped);
+              console.log(isFlipped);
+            }}
             shadow="sm"
             radius="lg"
             m="xl"
