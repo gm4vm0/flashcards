@@ -5,10 +5,11 @@ import {
 } from '@nestjs/common';
 import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import { Session } from 'express-session';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginUserDto } from './dto/login-user.dto';
 import { RegisterUserDto } from './dto/register-user.dto';
-import { Session } from 'express-session';
+import { UserWithDecks } from './types/user-with-decks.type';
 
 @Injectable()
 export class AuthService {
@@ -48,7 +49,7 @@ export class AuthService {
     });
   }
 
-  async findById(id: string): Promise<Omit<User, 'password'>> {
+  async findById(id: string): Promise<Omit<UserWithDecks, 'password'>> {
     const user = await this.prisma.user.findUnique({
       where: { id: id },
       include: { decks: true },
