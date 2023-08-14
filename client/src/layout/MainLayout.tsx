@@ -25,19 +25,21 @@ function MainLayout(props: Props) {
       padding={0}
       navbarOffsetBreakpoint="sm"
       navbar={
-        <Navbar
-          width={{ sm: "12rem", lg: "16rem" }}
-          hiddenBreakpoint="sm"
-          hidden={!isNavbarOpened}
-        >
-          <Navbar.Section grow>
-            <Text>Navbar</Text>
-          </Navbar.Section>
-          <Divider />
-          <Navbar.Section>
-            {user && <Text>User: {user.firstName}</Text>}
-          </Navbar.Section>
-        </Navbar>
+        user ? (
+          <Navbar
+            width={{ sm: "12rem", lg: "16rem" }}
+            hiddenBreakpoint="sm"
+            hidden={!isNavbarOpened}
+          >
+            <Navbar.Section grow>
+              <Text>Navbar</Text>
+            </Navbar.Section>
+            <Divider />
+            <Navbar.Section>
+              {user && <Text>User: {user.firstName}</Text>}
+            </Navbar.Section>
+          </Navbar>
+        ) : undefined
       }
       header={
         <Header height={60}>
