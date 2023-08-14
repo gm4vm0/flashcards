@@ -11,6 +11,16 @@ model Card {
   id    String @id @default(cuid())
   front String
   back  String
+
+  deck   Deck   @relation(fields: [deckId], references: [id])
+  deckId String
+}
+
+model Deck {
+  id   String @id @default(cuid())
+  name String
+
+  cards Card[]
 }
 
 model User {
