@@ -8,7 +8,4 @@ export class CreateCardDto {
   @IsNotEmpty()
   @MaxLength(30)
   back: string;
-
-  @IsNotEmpty()
-  deckId: string;
 }
