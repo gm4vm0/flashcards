@@ -18,17 +18,17 @@ export class CardsController {
 
   @Get()
   async getCards(): Promise<Card[]> {
-    return this.cardsService.getCards();
+    return await this.cardsService.getCards();
   }
 
   @Get(':id')
   async getCard(@Param('id') id: string): Promise<Card> {
-    return this.cardsService.getCard(id);
+    return await this.cardsService.getCard(id);
   }
 
   @Post()
   async createCard(@Body() createCardDto: CreateCardDto): Promise<Card> {
-    return this.cardsService.createCard(createCardDto);
+    return await this.cardsService.createCard(createCardDto);
   }
 
   @Patch(':id')
@@ -36,11 +36,11 @@ export class CardsController {
     @Param('id') id: string,
     @Body() updateCardDto: UpdateCardDto,
   ): Promise<Card> {
-    return this.cardsService.updateCard(id, updateCardDto);
+    return await this.cardsService.updateCard(id, updateCardDto);
   }
 
   @Delete(':id')
   async deleteCard(@Param('id') id: string): Promise<Card> {
-    return this.cardsService.deleteCard(id);
+    return await this.cardsService.deleteCard(id);
   }
 }
