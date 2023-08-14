@@ -17,6 +17,7 @@ export class AuthService {
   async validateUser(user: LoginUserDto): Promise<Omit<User, 'password'>> {
     const foundUser = await this.prisma.user.findUnique({
       where: { email: user.email },
+      include: { decks: true },
     });
     const isPasswordMatch = await bcrypt.compare(
       user.password,
@@ -50,6 +51,7 @@ export class AuthService {
   async findById(id: string): Promise<Omit<User, 'password'>> {
     const user = await this.prisma.user.findUnique({
       where: { id: id },
+      include: { decks: true },
     });
     if (!user) throw new BadRequestException();
     Reflect.deleteProperty(user, 'password');
