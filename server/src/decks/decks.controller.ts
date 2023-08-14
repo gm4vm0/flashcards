@@ -6,41 +6,60 @@ import {
   Param,
   Patch,
   Post,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
-import { DecksService } from './decks.service';
 import { Deck } from '@prisma/client';
+import { LoggedInGuard } from 'src/auth/logged-in.guard';
+import { DecksService } from './decks.service';
 import { CreateDeckDto } from './dto/create-deck.dto';
 import { UpdateDeckDto } from './dto/update-deck.dto';
+import { AuthenticatedRequest } from 'src/auth/types/authenticated-request.type';
 
 @Controller('decks')
 export class DecksController {
   constructor(private decksService: DecksService) {}
 
+  @UseGuards(LoggedInGuard)
   @Get()
-  async getDecks(): Promise<Deck[]> {
-    return this.decksService.getDecks();
+  async getDecks(@Req() req: AuthenticatedRequest): Promise<Deck[]> {
+    return this.decksService.getDecks(req.user.id);
   }
 
+  @UseGuards(LoggedInGuard)
   @Get(':id')
-  async getDeck(@Param('id') id: string): Promise<Deck> {
-    return await this.decksService.getDeck(id);
+  async getDeck(
+    @Req() req: AuthenticatedRequest,
+    @Param('id') id: string,
+  ): Promise<Deck> {
+    return await this.decksService.getDeck(id, req.user.id);
   }
 
+  @UseGuards(LoggedInGuard)
   @Post()
-  async createCard(@Body() createDeckDto: CreateDeckDto): Promise<Deck> {
-    return await this.decksService.createDeck(createDeckDto);
+  async createCard(
+    @Req() req: AuthenticatedRequest,
+    @Body() createDeckDto: CreateDeckDto,
+  ): Promise<Deck> {
+    return await this.decksService.createDeck(createDeckDto, req.user.id);
   }
 
+  @UseGuards(LoggedInGuard)
   @Patch(':id')
   async updateCard(
+    @Req() req: AuthenticatedRequest,
     @Param('id') id: string,
     @Body() updateDeckDto: UpdateDeckDto,
   ): Promise<Deck> {
-    return await this.decksService.updateDeck(id, updateDeckDto);
+    return await this.decksService.updateDeck(updateDeckDto, id, req.user.id);
   }
 
+  @UseGuards(LoggedInGuard)
   @Delete(':id')
-  async deleteDeck(@Param('id') id: string): Promise<Deck> {
-    return await this.decksService.deleteDeck(id);
+  async deleteDeck(
+    @Req() req: AuthenticatedRequest,
+    @Param('id') id: string,
+  ): Promise<Deck> {
+    return await this.decksService.deleteDeck(id, req.user.id);
   }
 }
