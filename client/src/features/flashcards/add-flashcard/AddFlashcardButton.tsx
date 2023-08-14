@@ -9,12 +9,9 @@ function AddFlashcardButton(props: Props) {
   return (
     <Button
       leftIcon={<IconPlus size={20} stroke={2} />}
-      variant="default"
-      color="gray"
-      mt="1.5rem"
+      color="primary"
       radius="md"
       size="sm"
-      styles={{ label: { fontWeight: "normal" } }}
       onClick={props.onClick}
     >
       Add New Card

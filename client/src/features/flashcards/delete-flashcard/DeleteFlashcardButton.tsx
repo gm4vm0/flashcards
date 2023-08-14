@@ -1,5 +1,5 @@
 import useCardsStore from "@/stores/cards-store";
-import { UnstyledButton } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import axios from "axios";
 import { useMutation } from "react-query";
@@ -27,9 +27,9 @@ function DeleteFlashcardButton(props: Props) {
   };
 
   return (
-    <UnstyledButton onClick={onClick}>
+    <ActionIcon onClick={onClick} color="neutral.9">
       <IconTrash strokeWidth={1.5} />
-    </UnstyledButton>
+    </ActionIcon>
   );
 }
 

@@ -25,6 +25,7 @@ function AuthButtons() {
       {user ? (
         <Button
           variant="subtle"
+          color="primary"
           styles={{
             root: {
               "&:hover": { background: "none" },
@@ -38,26 +39,27 @@ function AuthButtons() {
         <div>
           <Button
             variant="subtle"
+            color="primary"
             styles={{
               root: {
                 "&:hover": { background: "none" },
               },
             }}
           >
-            <Text component={Link} to="/register">
-              Register
+            <Text component={Link} to="/login">
+              Login
             </Text>
           </Button>
           <Button
-            variant="outline"
+            color="primary"
             styles={{
               root: {
                 borderRadius: "1rem",
               },
             }}
           >
-            <Text component={Link} to="/login">
-              Login
+            <Text component={Link} to="/register">
+              Register
             </Text>
           </Button>
         </div>
