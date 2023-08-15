@@ -4,7 +4,7 @@ import { create } from "zustand";
 type DecksState = {
   decks: Deck[];
   setDecks: (decks: Deck[]) => void;
-  currentDeck: null;
+  currentDeck: Deck | null;
 };
 
 const useDecksStore = create<DecksState>((set) => ({

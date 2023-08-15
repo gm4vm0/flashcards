@@ -6,10 +6,12 @@ import EditFlashcardModal from "./edit-flashcard/EditFlashcardModal";
 import DeleteFlashcardButton from "./delete-flashcard/DeleteFlashcardButton";
 import { useEffect, useState } from "react";
 import FlashcardControls from "./FlashcardControls";
+import useDecksStore from "@/stores/decks-store";
 
 function Flashcards() {
   const [isFlipped, setIsFlipped] = useState(false);
 
+  const currentDeck = useDecksStore((state) => state.currentDeck);
   const [cards, setCards, currentCardIndex, setNextCard, setPrevCard] =
     useCardsStore((state) => [
       state.cards,
@@ -28,7 +30,10 @@ function Flashcards() {
   useQuery({
     queryKey: ["cards"],
     queryFn: async () => {
-      const response = await axios.get(import.meta.env.VITE_API_URL + "cards");
+      if (!currentDeck) return [];
+      const response = await axios.get(
+        import.meta.env.VITE_API_URL + `cards/${currentDeck.id}`
+      );
       setCards(response.data);
       return response.data;
     },
