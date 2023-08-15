@@ -1,6 +1,5 @@
 import { Center, Flex, MediaQuery, Text } from "@mantine/core";
-import Flashcards from "@/features/flashcards/Flashcards";
-import AddFlashcardModal from "@/features/flashcards/add-flashcard/AddFlashcardModal";
+import Decks from "@/features/decks/Decks";
 import LoginPrompt from "@/layout/LoginPrompt";
 import useAuthStore from "@/stores/auth-store";
 
@@ -11,13 +10,15 @@ function Index() {
     <MediaQuery largerThan="lg" styles={{ padding: "3rem 8rem" }}>
       {user ? (
         <Center w="100%" h="100%" p="3rem" sx={{ flexDirection: "column" }}>
-          <Flex w="100%" mb="lg" justify="space-between" align="center">
-            <Text fz="xl" fw="bold">
+          <Flex w="100%" direction="column" align="start">
+            <Text fz="xl" fw="bold" ta="start">
               Welcome, {user.firstName}
             </Text>
-            <AddFlashcardModal />
+            <Text fz="lg" ta="start">
+              Here are your card decks:
+            </Text>
           </Flex>
-          <Flashcards />
+          <Decks />
         </Center>
       ) : (
         <LoginPrompt />
