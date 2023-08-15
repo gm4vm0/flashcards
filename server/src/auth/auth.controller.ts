@@ -14,6 +14,7 @@ import { RegisterUserDto } from './dto/register-user.dto';
 import { LocalGuard } from './local.guard';
 import { LoggedInGuard } from './logged-in.guard';
 import { User } from '@prisma/client';
+import { UserWithDecks } from './types/user-with-decks.type';
 
 @Controller('auth')
 export class AuthController {
@@ -40,8 +41,8 @@ export class AuthController {
   @Post('login')
   async login(
     @Req() req: Request & { session: Session },
-  ): Promise<Omit<User, 'password'>> {
-    const user = req.user as User;
+  ): Promise<Omit<UserWithDecks, 'password'>> {
+    const user = req.user as UserWithDecks;
     Reflect.deleteProperty(user, 'password');
     return user;
   }
