@@ -1,8 +1,8 @@
+import { Flex, Grid, Text } from "@mantine/core";
 import axios from "axios";
 import { useQuery } from "react-query";
-import { Deck } from "@/types/deck-type";
-import { Grid } from "@mantine/core";
 import useDecksStore from "@/stores/decks-store";
+import { Deck } from "@/types/deck-type";
 
 function Decks() {
   const [decks, setDecks] = useDecksStore((state) => [
@@ -24,17 +24,24 @@ function Decks() {
   });
 
   return (
-    <Grid w="100%">
+    <Flex w="100%" direction="column" align="start">
       {decks.length === 0 ? (
-        <p>No decks yet</p>
+        <p>No decks created yet... create one now!</p>
       ) : (
-        decks.map((deck: Deck) => (
-          <Grid.Col key={deck.id} span={4}>
-            {deck.name}
-          </Grid.Col>
-        ))
+        <div>
+          <Text fz="lg" ta="start">
+            Here are your card decks:
+          </Text>
+          <Grid w="100%" m="0">
+            {decks.map((deck: Deck) => (
+              <Grid.Col key={deck.id} span={4}>
+                {deck.name}
+              </Grid.Col>
+            ))}
+          </Grid>
+        </div>
       )}
-    </Grid>
+    </Flex>
   );
 }
 

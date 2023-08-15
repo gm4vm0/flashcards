@@ -10,12 +10,9 @@ function Index() {
     <MediaQuery largerThan="lg" styles={{ padding: "3rem 8rem" }}>
       {user ? (
         <Center w="100%" h="100%" p="3rem" sx={{ flexDirection: "column" }}>
-          <Flex w="100%" direction="column" align="start">
+          <Flex w="100%">
             <Text fz="xl" fw="bold" ta="start">
               Welcome, {user.firstName}
-            </Text>
-            <Text fz="lg" ta="start">
-              Here are your card decks:
             </Text>
           </Flex>
           <Decks />
