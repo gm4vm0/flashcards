@@ -14,7 +14,8 @@ function DeleteFlashcardButton(props: Props) {
   const mutation = useMutation({
     mutationFn: () => {
       return axios.delete(
-        import.meta.env.VITE_API_URL + `cards/${props.cardId}`
+        import.meta.env.VITE_API_URL + `cards/${props.cardId}`,
+        { withCredentials: true }
       );
     },
     onSuccess: () => {

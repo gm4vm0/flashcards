@@ -44,7 +44,8 @@ function EditFlashCardForm(props: Props) {
 
       return axios.patch(
         import.meta.env.VITE_API_URL + `cards/${props.card.id}`,
-        data
+        data,
+        { withCredentials: true }
       );
     },
   });
