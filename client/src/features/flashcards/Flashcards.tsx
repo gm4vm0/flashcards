@@ -71,7 +71,6 @@ function Flashcards() {
             <Paper
               onClick={() => {
                 setIsFlipped(!isFlipped);
-                console.log(isFlipped);
               }}
               shadow="sm"
               radius="lg"
