@@ -37,7 +37,7 @@ function Navbar(props: Props) {
             size="0.75rem"
             sx={{
               border: "none",
-              transform: `rotate(${isExpanded ? "0" : "90deg"})`,
+              transform: `rotate(${isExpanded ? "180deg" : "90deg"})`,
               background: "none",
               ":hover": { background: "none" },
             }}
