@@ -15,7 +15,9 @@ function Index() {
               Welcome, {user.firstName}
             </Text>
           </Flex>
-          <Decks />
+          <Flex w="100%">
+            <Decks />
+          </Flex>
         </Center>
       ) : (
         <LoginPrompt />

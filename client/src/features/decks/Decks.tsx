@@ -3,6 +3,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import useDecksStore from "@/stores/decks-store";
 import { Deck } from "@/types/deck-type";
+import DeckCard from "./DeckCard";
 
 function Decks() {
   const [decks, setDecks] = useDecksStore((state) => [
@@ -24,22 +25,24 @@ function Decks() {
   });
 
   return (
-    <Flex w="100%" direction="column" align="start">
+    <Flex w="100%" mt="3rem">
       {decks.length === 0 ? (
-        <p>No decks created yet... create one now!</p>
+        <Flex w="100%" justify="start">
+          <p>No decks created yet... create one now!</p>
+        </Flex>
       ) : (
-        <div>
+        <Flex w="100%" direction="column">
           <Text fz="lg" ta="start">
             Here are your card decks:
           </Text>
-          <Grid w="100%" m="0">
+          <Grid gutter="xl" mt="1rem">
             {decks.map((deck: Deck) => (
-              <Grid.Col key={deck.id} span={4}>
-                {deck.name}
+              <Grid.Col key={deck.id} sm={6} lg={4}>
+                <DeckCard deck={deck} />
               </Grid.Col>
             ))}
           </Grid>
-        </div>
+        </Flex>
       )}
     </Flex>
   );
