@@ -1,3 +1,4 @@
+import useDecksStore from "@/stores/decks-store";
 import { User } from "@/types/user-type";
 import {
   ActionIcon,
@@ -17,6 +18,8 @@ type Props = {
 
 function Navbar(props: Props) {
   const [isExpanded, setIsExpanded] = useState(true);
+
+  const decks = useDecksStore((state) => state.decks);
 
   return (
     <MantineNavbar
@@ -46,12 +49,16 @@ function Navbar(props: Props) {
           </ActionIcon>
           <Text fw="bold">Card decks</Text>
         </Flex>
-        <Text ml="1.25rem" mt="6px" display={isExpanded ? "block" : "none"}>
-          Dummy deck 1
-        </Text>
-        <Text ml="1.25rem" mt="6px" display={isExpanded ? "block" : "none"}>
-          Dummy deck 2
-        </Text>
+        {decks.map((deck) => (
+          <Text
+            key={deck.id}
+            ml="1.25rem"
+            mt="6px"
+            display={isExpanded ? "block" : "none"}
+          >
+            {deck.name}
+          </Text>
+        ))}
       </MantineNavbar.Section>
       <MantineNavbar.Section p="1rem">
         {props.user && (
