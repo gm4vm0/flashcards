@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import { IconTriangleFilled, IconUser } from "@tabler/icons-react";
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 type Props = {
   isNavbarOpened: boolean;
