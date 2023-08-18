@@ -60,7 +60,7 @@ function Flashcards() {
         <AddFlashcardModal />
       </Flex>
       {cards.length === 0 ? (
-        <Flex direction="column" align="center">
+        <Flex h="100%" direction="column" justify="center" align="center">
           <Text fz="lg" fs="italic" mb="2rem">
             No cards created yet...
           </Text>
