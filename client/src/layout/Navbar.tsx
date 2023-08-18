@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { IconTriangleFilled, IconUser } from "@tabler/icons-react";
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 type Props = {
   isNavbarOpened: boolean;
@@ -52,9 +53,17 @@ function Navbar(props: Props) {
         {decks.map((deck) => (
           <Text
             key={deck.id}
+            component={NavLink}
+            to={`/deck/${deck.id}`}
             ml="1.25rem"
             mt="6px"
             display={isExpanded ? "block" : "none"}
+            sx={(theme) => ({
+              "&.active": {
+                color: theme.colors.primary[4],
+                fontWeight: "bold",
+              },
+            })}
           >
             {deck.name}
           </Text>
