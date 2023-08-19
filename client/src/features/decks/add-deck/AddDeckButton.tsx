@@ -5,7 +5,7 @@ type Props = {
   onClick: () => void;
 };
 
-function AddFlashcardButton(props: Props) {
+function AddDeckButton(props: Props) {
   return (
     <Button
       leftIcon={<IconPlus size={20} stroke={2} />}
@@ -14,9 +14,9 @@ function AddFlashcardButton(props: Props) {
       size="sm"
       onClick={props.onClick}
     >
-      Add new card
+      Add new deck
     </Button>
   );
 }
 
-export default AddFlashcardButton;
+export default AddDeckButton;

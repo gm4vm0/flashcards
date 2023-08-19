@@ -9,12 +9,19 @@ function AddFlashcardModal() {
   return (
     <>
       <Modal
-        title="New Card"
+        title="Add new card"
+        padding="xl"
         centered
         opened={isOpened}
         onClose={() => {
           setIsOpened(false);
         }}
+        styles={(theme) => ({
+          title: {
+            fontSize: theme.fontSizes.lg,
+            fontWeight: "bold",
+          },
+        })}
       >
         <AddFlashCardForm
           onSubmit={() => {

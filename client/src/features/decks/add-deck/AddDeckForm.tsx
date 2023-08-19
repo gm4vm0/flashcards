@@ -1,21 +1,26 @@
-import useAuthStore from "@/stores/auth-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Center, TextInput } from "@mantine/core";
-import { IconAt, IconLock } from "@tabler/icons-react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import useDecksStore from "@/stores/decks-store";
 
 const inputsSchema = z.object({
-  email: z.string(),
-  password: z.string(),
+  name: z
+    .string()
+    .trim()
+    .min(1, "Content is required.")
+    .max(50, "Content must be under 30 characters."),
 });
 type Inputs = z.infer<typeof inputsSchema>;
 
-function LoginForm() {
-  const setUser = useAuthStore((state) => state.setUser);
+type Props = {
+  onSubmit: () => void;
+};
+
+function AddDeckForm(props: Props) {
+  const addDeck = useDecksStore((state) => state.addDeck);
 
   const {
     register,
@@ -25,11 +30,9 @@ function LoginForm() {
     resolver: zodResolver(inputsSchema),
   });
 
-  const navigate = useNavigate();
-
   const mutation = useMutation({
     mutationFn: (data: Inputs) => {
-      return axios.post(import.meta.env.VITE_API_URL + "auth/login", data, {
+      return axios.post(import.meta.env.VITE_API_URL + `decks`, data, {
         withCredentials: true,
       });
     },
@@ -38,36 +41,26 @@ function LoginForm() {
   const onSubmit = (data: Inputs) => {
     mutation.mutate(data, {
       onSuccess: (data) => {
-        setUser(data.data);
-        navigate("/");
+        addDeck(data.data);
       },
     });
+    props.onSubmit();
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)}>
       <TextInput
-        {...register("email")}
-        label="Email"
-        error={errors.email?.message}
-        icon={<IconAt size="20" />}
-        mt="1rem"
-      />
-      <TextInput
-        {...register("password")}
-        label="Password"
-        error={errors.password?.message}
-        type="password"
-        icon={<IconLock size="20" />}
-        mt="1rem"
+        {...register("name")}
+        label="Deck name"
+        error={errors.name?.message}
       />
       <Center mt="2rem">
         <Button type="submit" color="primary" w="100%">
-          Login
+          Add Deck
         </Button>
       </Center>
     </Box>
   );
 }
 
-export default LoginForm;
+export default AddDeckForm;

@@ -44,7 +44,8 @@ function EditFlashCardForm(props: Props) {
 
       return axios.patch(
         import.meta.env.VITE_API_URL + `cards/${props.card.id}`,
-        data
+        data,
+        { withCredentials: true }
       );
     },
   });
@@ -62,20 +63,20 @@ function EditFlashCardForm(props: Props) {
     <Box component="form" onSubmit={handleSubmit(onSubmit)}>
       <TextInput
         {...register("front")}
-        label="Front content"
+        label="Front"
         placeholder={props.card.front}
         error={errors.front?.message}
       />
       <TextInput
         {...register("back")}
-        label="Back content"
+        label="Back"
         error={errors.back?.message}
         placeholder={props.card.back}
         mt="1rem"
       />
       <Center mt="2rem">
-        <Button type="submit" variant="light" w="100%">
-          Edit Card
+        <Button type="submit" color="primary" w="100%">
+          Edit card
         </Button>
       </Center>
     </Box>

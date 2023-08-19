@@ -1,25 +1,25 @@
-import useCardsStore from "@/stores/cards-store";
 import { ActionIcon } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import axios from "axios";
 import { useMutation } from "react-query";
+import useDecksStore from "@/stores/decks-store";
 
 type Props = {
-  cardId: string;
+  deckId: string;
 };
 
-function DeleteFlashcardButton(props: Props) {
-  const deleteCard = useCardsStore((state) => state.deleteCard);
+function DeleteDeckButton(props: Props) {
+  const deleteDeck = useDecksStore((state) => state.deleteDeck);
 
   const mutation = useMutation({
     mutationFn: () => {
       return axios.delete(
-        import.meta.env.VITE_API_URL + `cards/${props.cardId}`,
+        import.meta.env.VITE_API_URL + `decks/${props.deckId}`,
         { withCredentials: true }
       );
     },
     onSuccess: () => {
-      deleteCard(props.cardId);
+      deleteDeck(props.deckId);
     },
   });
 
@@ -29,9 +29,9 @@ function DeleteFlashcardButton(props: Props) {
 
   return (
     <ActionIcon onClick={onClick} color="neutral.9">
-      <IconTrash strokeWidth={1.5} />
+      <IconTrash size="20" strokeWidth={1.5} />
     </ActionIcon>
   );
 }
 
-export default DeleteFlashcardButton;
+export default DeleteDeckButton;

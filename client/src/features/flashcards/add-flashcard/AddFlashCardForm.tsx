@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { z } from "zod";
 import useCardsStore from "@/stores/cards-store";
+import useDecksStore from "@/stores/decks-store";
 
 const inputsSchema = z.object({
   front: z
@@ -25,6 +26,7 @@ type Props = {
 };
 
 function AddFlashCardForm(props: Props) {
+  const currentDeck = useDecksStore((state) => state.currentDeck);
   const addCard = useCardsStore((state) => state.addCard);
 
   const {
@@ -37,7 +39,11 @@ function AddFlashCardForm(props: Props) {
 
   const mutation = useMutation({
     mutationFn: (data: Inputs) => {
-      return axios.post(import.meta.env.VITE_API_URL + "cards", data);
+      return axios.post(
+        import.meta.env.VITE_API_URL + `cards/${currentDeck?.id}`,
+        data,
+        { withCredentials: true }
+      );
     },
   });
 
@@ -54,20 +60,18 @@ function AddFlashCardForm(props: Props) {
     <Box component="form" onSubmit={handleSubmit(onSubmit)}>
       <TextInput
         {...register("front")}
-        label="Front content"
+        label="Front"
         error={errors.front?.message}
-        withAsterisk
       />
       <TextInput
         {...register("back")}
-        label="Back content"
+        label="Back"
         error={errors.back?.message}
-        withAsterisk
         mt="1rem"
       />
       <Center mt="2rem">
-        <Button type="submit" variant="light" w="100%">
-          Add Card
+        <Button type="submit" color="primary" w="100%">
+          Add card
         </Button>
       </Center>
     </Box>

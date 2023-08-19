@@ -1,20 +1,15 @@
 import { Modal } from "@mantine/core";
 import { useState } from "react";
-import EditFlashcardButton from "./EditFlashcardButton";
-import EditFlashCardForm from "./EditFlashcardForm";
-import { Card } from "@/types/card-type";
+import AddDeckButton from "./AddDeckButton";
+import AddDeckForm from "./AddDeckForm";
 
-type Props = {
-  card: Card;
-};
-
-function EditFlashcardModal(props: Props) {
+function AddDeckModal() {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
     <>
       <Modal
-        title="Edit card"
+        title="Add new deck"
         padding="xl"
         centered
         opened={isOpened}
@@ -28,15 +23,14 @@ function EditFlashcardModal(props: Props) {
           },
         })}
       >
-        <EditFlashCardForm
-          card={props.card}
+        <AddDeckForm
           onSubmit={() => {
             setIsOpened(false);
           }}
         />
       </Modal>
 
-      <EditFlashcardButton
+      <AddDeckButton
         onClick={() => {
           setIsOpened(true);
         }}
@@ -45,4 +39,4 @@ function EditFlashcardModal(props: Props) {
   );
 }
 
-export default EditFlashcardModal;
+export default AddDeckModal;

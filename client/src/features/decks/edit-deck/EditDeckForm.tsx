@@ -1,21 +1,28 @@
-import useAuthStore from "@/stores/auth-store";
+import useDecksStore from "@/stores/decks-store";
+import { Deck } from "@/types/deck-type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Center, TextInput } from "@mantine/core";
-import { IconAt, IconLock } from "@tabler/icons-react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const inputsSchema = z.object({
-  email: z.string(),
-  password: z.string(),
+  name: z
+    .string()
+    .trim()
+    .max(50, "Content must be under 50 characters.")
+    .optional(),
 });
 type Inputs = z.infer<typeof inputsSchema>;
 
-function LoginForm() {
-  const setUser = useAuthStore((state) => state.setUser);
+type Props = {
+  deck: Deck;
+  onSubmit: () => void;
+};
+
+function EditDeckForm(props: Props) {
+  const updateDeck = useDecksStore((state) => state.updateDeck);
 
   const {
     register,
@@ -25,49 +32,42 @@ function LoginForm() {
     resolver: zodResolver(inputsSchema),
   });
 
-  const navigate = useNavigate();
-
   const mutation = useMutation({
     mutationFn: (data: Inputs) => {
-      return axios.post(import.meta.env.VITE_API_URL + "auth/login", data, {
-        withCredentials: true,
-      });
+      if (!data.name) data.name = undefined;
+
+      return axios.patch(
+        import.meta.env.VITE_API_URL + `decks/${props.deck.id}`,
+        data,
+        { withCredentials: true }
+      );
     },
   });
 
   const onSubmit = (data: Inputs) => {
     mutation.mutate(data, {
       onSuccess: (data) => {
-        setUser(data.data);
-        navigate("/");
+        updateDeck(props.deck.id, data.data);
       },
     });
+    props.onSubmit();
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)}>
       <TextInput
-        {...register("email")}
-        label="Email"
-        error={errors.email?.message}
-        icon={<IconAt size="20" />}
-        mt="1rem"
-      />
-      <TextInput
-        {...register("password")}
-        label="Password"
-        error={errors.password?.message}
-        type="password"
-        icon={<IconLock size="20" />}
-        mt="1rem"
+        {...register("name")}
+        label="Deck name"
+        error={errors.name?.message}
+        placeholder={props.deck.name}
       />
       <Center mt="2rem">
         <Button type="submit" color="primary" w="100%">
-          Login
+          Edit deck
         </Button>
       </Center>
     </Box>
   );
 }
 
-export default LoginForm;
+export default EditDeckForm;

@@ -1,5 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Center, TextInput } from "@mantine/core";
+import {
+  IconAt,
+  IconLock,
+  IconLockCheck,
+  IconSignature,
+} from "@tabler/icons-react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
@@ -65,20 +71,20 @@ function RegisterForm() {
         {...register("firstName")}
         label="First name"
         error={errors.firstName?.message}
-        withAsterisk
+        icon={<IconSignature size="20" />}
       />
       <TextInput
         {...register("lastName")}
         label="Last name"
         error={errors.lastName?.message}
-        withAsterisk
+        icon={<IconSignature size="20" />}
         mt="1rem"
       />
       <TextInput
         {...register("email")}
         label="Email"
         error={errors.email?.message}
-        withAsterisk
+        icon={<IconAt size="20" />}
         mt="1rem"
       />
       <TextInput
@@ -86,7 +92,7 @@ function RegisterForm() {
         label="Password"
         error={errors.password?.message}
         type="password"
-        withAsterisk
+        icon={<IconLock size="20" />}
         mt="1rem"
       />
       <TextInput
@@ -94,11 +100,11 @@ function RegisterForm() {
         label="Password confirmation"
         error={errors.confirmPassword?.message}
         type="password"
-        withAsterisk
+        icon={<IconLockCheck size="20" />}
         mt="1rem"
       />
       <Center mt="2rem">
-        <Button type="submit" variant="light" w="100%">
+        <Button type="submit" color="primary" w="100%">
           Register
         </Button>
       </Center>
