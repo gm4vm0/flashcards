@@ -2,6 +2,7 @@ import { Button, Card, Flex, Text } from "@mantine/core";
 import { Deck } from "@/types/deck-type";
 import { Link } from "react-router-dom";
 import EditDeckModal from "./edit-deck/EditDeckModal";
+import DeleteDeckButton from "./delete-deck/DeleteDeckButton";
 
 type Props = {
   deck: Deck;
@@ -14,7 +15,10 @@ function DeckCard(props: Props) {
         <Text fw="bold" truncate>
           {props.deck.name}
         </Text>
-        <EditDeckModal deck={props.deck} />
+        <Flex>
+          <EditDeckModal deck={props.deck} />
+          <DeleteDeckButton deckId={props.deck.id} />
+        </Flex>
       </Flex>
       <Button
         component={Link}

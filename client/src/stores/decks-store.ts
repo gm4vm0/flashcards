@@ -6,6 +6,7 @@ type DecksState = {
   setDecks: (decks: Deck[]) => void;
   addDeck: (deck: Deck) => void;
   updateDeck: (deckId: string, updateData: { name?: string }) => void;
+  deleteDeck: (deckId: string) => void;
   currentDeck: Deck | null;
 };
 
@@ -20,6 +21,11 @@ const useDecksStore = create<DecksState>((set) => ({
           return Object.assign(deck, updateData);
         } else return deck;
       });
+      return { decks: newDecks };
+    }),
+  deleteDeck: (deckId) =>
+    set((state) => {
+      const newDecks = state.decks.filter((deck) => deck.id !== deckId);
       return { decks: newDecks };
     }),
   currentDeck: null,
