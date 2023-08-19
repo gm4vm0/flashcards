@@ -4,8 +4,6 @@ import session from 'express-session';
 import ms from 'ms';
 import passport from 'passport';
 import { RedisClientType } from 'redis';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CardsModule } from './cards/cards.module';
 import { DecksModule } from './decks/decks.module';
@@ -15,8 +13,6 @@ import { RedisModule } from './redis/redis.module';
 
 @Module({
   imports: [PrismaModule, CardsModule, DecksModule, RedisModule, AuthModule],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule implements NestModule {
   constructor(@Inject(REDIS) private redis: RedisClientType) {}
