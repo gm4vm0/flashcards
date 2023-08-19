@@ -4,8 +4,11 @@ const theme: MantineThemeOverride = {
   focusRingStyles: {
     resetStyles: () => ({ outline: "none" }),
     styles: (theme) => ({ outline: `2px solid ${theme.colors.primary[2]}` }),
+    inputStyles: (theme) => ({
+      outline: `2px solid ${theme.colors.primary[2]}`,
+    }),
   },
-  white: "#F5F5F5",
+  white: "#F5F5f5",
   black: "#111111",
   colors: {
     primary: [
