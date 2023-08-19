@@ -29,9 +29,23 @@ function Navbar(props: Props) {
       hidden={!props.isNavbarOpened}
     >
       <MantineNavbar.Section p="1rem" pt="2rem" grow>
+        <Text
+          fw="bold"
+          component={NavLink}
+          to="/"
+          sx={(theme) => ({
+            "&.active": {
+              color: theme.colors.primary[4],
+              fontWeight: "bold",
+            },
+          })}
+        >
+          Home
+        </Text>
         <Flex
           align="center"
           gap="0.5rem"
+          mt="1rem"
           onClick={() => setIsExpanded(!isExpanded)}
           sx={{ ":hover": { cursor: "pointer" } }}
         >
