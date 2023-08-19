@@ -28,7 +28,7 @@ function Decks() {
     <Flex w="100%" mt="3rem">
       {decks.length === 0 ? (
         <Flex w="100%" justify="start">
-          <p>No decks created yet... create one now!</p>
+          <Text>No decks created yet... create one now!</Text>
         </Flex>
       ) : (
         <Flex w="100%" direction="column">
