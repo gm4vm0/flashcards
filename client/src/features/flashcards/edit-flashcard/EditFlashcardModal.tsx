@@ -14,12 +14,19 @@ function EditFlashcardModal(props: Props) {
   return (
     <>
       <Modal
-        title="Edit Card"
+        title="Edit card"
+        padding="xl"
         centered
         opened={isOpened}
         onClose={() => {
           setIsOpened(false);
         }}
+        styles={(theme) => ({
+          title: {
+            fontSize: theme.fontSizes.lg,
+            fontWeight: "bold",
+          },
+        })}
       >
         <EditFlashCardForm
           card={props.card}

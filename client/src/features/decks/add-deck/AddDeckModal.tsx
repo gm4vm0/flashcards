@@ -9,12 +9,19 @@ function AddDeckModal() {
   return (
     <>
       <Modal
-        title="New Deck"
+        title="Add new deck"
+        padding="xl"
         centered
         opened={isOpened}
         onClose={() => {
           setIsOpened(false);
         }}
+        styles={(theme) => ({
+          title: {
+            fontSize: theme.fontSizes.lg,
+            fontWeight: "bold",
+          },
+        })}
       >
         <AddDeckForm
           onSubmit={() => {

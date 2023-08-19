@@ -53,10 +53,9 @@ function AddDeckForm(props: Props) {
         {...register("name")}
         label="Deck name"
         error={errors.name?.message}
-        withAsterisk
       />
       <Center mt="2rem">
-        <Button type="submit" variant="light" w="100%">
+        <Button type="submit" color="primary" w="100%">
           Add Deck
         </Button>
       </Center>

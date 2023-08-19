@@ -14,12 +14,19 @@ function EditDeckModal(props: Props) {
   return (
     <>
       <Modal
-        title="Edit Deck"
+        title="Edit deck"
+        padding="xl"
         centered
         opened={isOpened}
         onClose={() => {
           setIsOpened(false);
         }}
+        styles={(theme) => ({
+          title: {
+            fontSize: theme.fontSizes.lg,
+            fontWeight: "bold",
+          },
+        })}
       >
         <EditDeckForm
           deck={props.deck}

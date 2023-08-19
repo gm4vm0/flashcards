@@ -14,7 +14,7 @@ function AddDeckButton(props: Props) {
       size="sm"
       onClick={props.onClick}
     >
-      Add New Deck
+      Add new deck
     </Button>
   );
 }

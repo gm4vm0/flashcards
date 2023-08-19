@@ -60,11 +60,10 @@ function EditDeckForm(props: Props) {
         label="Deck name"
         error={errors.name?.message}
         placeholder={props.deck.name}
-        mt="1rem"
       />
       <Center mt="2rem">
-        <Button type="submit" variant="light" w="100%">
-          Edit Deck
+        <Button type="submit" color="primary" w="100%">
+          Edit deck
         </Button>
       </Center>
     </Box>

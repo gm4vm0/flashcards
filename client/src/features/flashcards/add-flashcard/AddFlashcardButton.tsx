@@ -14,7 +14,7 @@ function AddFlashcardButton(props: Props) {
       size="sm"
       onClick={props.onClick}
     >
-      Add New Card
+      Add new card
     </Button>
   );
 }
