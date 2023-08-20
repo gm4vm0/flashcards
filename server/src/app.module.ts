@@ -28,7 +28,7 @@ export class AppModule implements NestModule {
           cookie: {
             maxAge: ms('0.5 Y'),
             sameSite: 'none',
-            secure: 'auto',
+            secure: process.env.NODE_ENV === 'production' ? true : false,
           },
         }),
         passport.initialize(),
