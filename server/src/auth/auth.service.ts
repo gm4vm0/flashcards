@@ -20,11 +20,12 @@ export class AuthService {
       where: { email: user.email },
       include: { decks: true },
     });
+    if (!foundUser) throw new UnauthorizedException();
     const isPasswordMatch = await bcrypt.compare(
       user.password,
       foundUser.password,
     );
-    if (!(user && isPasswordMatch)) throw new UnauthorizedException();
+    if (!isPasswordMatch) throw new UnauthorizedException();
     Reflect.deleteProperty(foundUser, 'password');
     return foundUser;
   }
