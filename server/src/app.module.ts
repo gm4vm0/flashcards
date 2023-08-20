@@ -27,6 +27,8 @@ export class AppModule implements NestModule {
           secret: process.env.JWT_SECRET,
           cookie: {
             maxAge: ms('0.5 Y'),
+            sameSite: 'none',
+            secure: 'auto',
           },
         }),
         passport.initialize(),
